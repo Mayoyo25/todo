@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form onsubmit="handleSubmit(event)">
+      <label for="test"></label>
+      <input type="text" placeholder="Your text here" id="test" />
+      <button type="submit">Submit</button>
+    </form>
+    <ul></ul>
+    <script>
+      const listContainer = document.querySelector('ul')
+      let myArray = []
+      const handleSubmit = (e) => {
+        e.preventDefault()
+        const value = e.target.test.value.trim()
+        const splitTasks = value.split(',')
+        const lengthOfTasks = splitTasks.length
+        if (value) {
+          for (let i = 0; i < lengthOfTasks; i++) {
+            const currentItemsLength = myArray.length
+            const ourListItem = {
+              id: currentItemsLength + 1,
+              name: splitTasks[i],
+            }
+            myArray.push(ourListItem)
+          }
+        }
+
+        const getMyListItems = myArray
+          .map((item) => {
+            return `<li>key ${item.id}: ${item.name}</li>`
+          })
+          .join('')
+        listContainer.innerHTML = getMyListItems
+      }
+    </script>
+  </body>
+</html>
